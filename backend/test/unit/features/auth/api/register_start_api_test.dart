@@ -2,16 +2,16 @@ import 'dart:convert';
 
 import 'package:backend/src/core/di/locator.dart';
 import 'package:backend/src/features/auth/auth_controller.dart';
-import 'package:backend/src/features/auth/domain/entities/user_entity.dart';
-import 'package:backend/src/features/auth/domain/usecases/i_register_user.dart';
-import 'package:backend/src/features/auth/domain/usecases/login_user.dart';
-import 'package:backend/src/features/auth/domain/value_objects/login_result.dart';
-import 'package:backend/src/features/auth/domain/value_objects/new_user.dart';
+import 'package:backend/src/features/auth/register/complete_profile/api/dto/request/complete_profile_request_dto.dart';
+import 'package:backend/src/features/auth/register/complete_profile/domain/use_cases/register_user_use_case.dart';
 import 'package:backend/src/features/auth/register/start/api/dto/request/start_registration_request_dto.dart';
 import 'package:backend/src/features/auth/register/start/domain/use_cases/start_registration_use_case.dart';
 import 'package:backend/src/features/auth/register/start/domain/value_objects/pending_registration.dart';
 import 'package:backend/src/features/auth/register/verify_email/domain/use_cases/verify_registration_email_use_case.dart';
 import 'package:backend/src/features/auth/shared/auth_error_codes.dart';
+import 'package:backend/src/features/auth/shared/domain/entities/user_entity.dart';
+import 'package:backend/src/features/auth/shared/domain/usecases/login_user.dart';
+import 'package:backend/src/features/auth/shared/domain/value_objects/login_result.dart';
 import 'package:backend/src/middleware/error_middleware.dart';
 import 'package:shelf/shelf.dart';
 import 'package:talker/talker.dart';
@@ -28,7 +28,7 @@ void main() {
     startRegistrationUseCase = _FakeStartRegistrationUseCase();
     final api = AuthApi(
       _UnusedLoginUser(),
-      _UnusedRegisterUser(),
+      _UnusedCompleteRegistrationProfileUseCase(),
       startRegistrationUseCase,
       _UnusedVerifyRegistrationEmailUseCase(),
     );
@@ -152,11 +152,12 @@ final class _UnusedLoginUser implements ILoginUser {
   }
 }
 
-final class _UnusedRegisterUser implements IRegisterUser {
+final class _UnusedCompleteRegistrationProfileUseCase
+    implements ICompleteRegistrationProfileUseCase {
   @override
-  Future<UserEntity> call(NewUser data) {
+  Future<UserEntity> call(CompleteProfileRequestDto data) {
     throw StateError(
-      'IRegisterUser should not be called in register/start tests',
+      'ICompleteRegistrationProfileUseCase should not be called in register/start tests',
     );
   }
 }
