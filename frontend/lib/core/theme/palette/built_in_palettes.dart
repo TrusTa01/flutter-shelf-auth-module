@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:void_chat/core/theme/app_colors.dart';
-import 'package:void_chat/core/theme/palette/palette_data.dart';
+import 'package:flutter_shelf_auth_module/core/theme/app_colors.dart';
+import 'package:flutter_shelf_auth_module/core/theme/palette/palette_data.dart';
 
 // All built-in palettes
 abstract final class BuiltInPalettes {

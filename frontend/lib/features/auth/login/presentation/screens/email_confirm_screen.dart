@@ -2,21 +2,21 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:void_chat/core/extensions/l10n_ext.dart';
-import 'package:void_chat/core/layouts/auth_layout.dart';
-import 'package:void_chat/features/auth/login/domain/failures/login_failure.dart';
-import 'package:void_chat/features/auth/login/presentation/cubit/login_cubit.dart';
-import 'package:void_chat/features/auth/login/presentation/cubit/login_state.dart';
-import 'package:void_chat/features/auth/login/presentation/extensions/login_failure_message.dart';
-import 'package:void_chat/features/auth/login/presentation/widgets/sections/verify_form_section.dart';
-import 'package:void_chat/features/auth/shared/presentation/hooks/use_email_code_resend_cooldown.dart';
-import 'package:void_chat/features/auth/shared/presentation/validation/verification_code_validation.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/components/auth_body.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/components/auth_footer_link.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/components/auth_header.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/ui_kits/app_snack_bar.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/ui_kits/loading_button.dart';
-import 'package:void_chat/router/app_router.dart';
+import 'package:flutter_shelf_auth_module/core/extensions/l10n_ext.dart';
+import 'package:flutter_shelf_auth_module/core/layouts/auth_layout.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/domain/failures/login_failure.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/presentation/cubit/login_cubit.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/presentation/cubit/login_state.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/presentation/extensions/login_failure_message.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/presentation/widgets/sections/verify_form_section.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/hooks/use_email_code_resend_cooldown.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/validation/verification_code_validation.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/components/auth_body.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/components/auth_footer_link.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/components/auth_header.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/ui_kits/app_snack_bar.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/ui_kits/loading_button.dart';
+import 'package:flutter_shelf_auth_module/router/app_router.dart';
 
 @RoutePage()
 class EmailConfirmScreen extends HookWidget {
@@ -50,7 +50,7 @@ class EmailConfirmScreen extends HookWidget {
               resendCooldown.startCooldown();
             }
           case LoginSuccess():
-            context.router.replaceAll([const AppLayoutRoute()]);
+            context.router.replaceAll([const AccountRoute()]);
           default:
             break;
         }

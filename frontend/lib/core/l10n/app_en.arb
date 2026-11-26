@@ -1,10 +1,10 @@
 {
   "@@locale": "en",
-  "appTitle": "Void",
+  "appTitle": "Auth Module",
   "@appTitle": {
     "description": "App title in app bar and system"
   },
-  "appDescription": "Your private space for <bold>secure</bold> and <bold>seamless</bold> communication",
+  "appDescription": "Sign up, verify your <bold>email</bold> and manage your <bold>sessions</bold>",
   "@appDescription": {
     "description": "Full description on welcome screen"
   },
@@ -32,7 +32,7 @@
   "@greeting": {
     "description": "Main text in login screen"
   },
-  "greetingDescription": "Step into the digital silence",
+  "greetingDescription": "Sign in to your account",
   "@greetingDescription": {
     "description": "A text under a greeting in login screen"
   },
@@ -60,9 +60,9 @@
   "@dontHaveAcc": {
     "description": "Redirect to sing up screen if user doesnt have an account"
   },
-  "singUp": "Sing up",
-  "@singUp": {
-    "description": "Sing up redirect"
+  "signUp": "Sign up",
+  "@signUp": {
+    "description": "Sign up redirect"
   },
   "logIn": "Log in",
   "@logIn": {
@@ -156,7 +156,7 @@
   "@registerEmailLabel": {
     "description": "Label for the email-only field on registration"
   },
-  "registerEmailHint": "you@void.com",
+  "registerEmailHint": "you@example.com",
   "@registerEmailHint": {
     "description": "Placeholder example for the registration email field"
   },
@@ -164,11 +164,11 @@
   "@registerLoginLabel": {
     "description": "Label for the login handle on registration"
   },
-  "registerLoginHint": "void_explorer",
+  "registerLoginHint": "john_doe",
   "@registerLoginHint": {
     "description": "Placeholder example for the registration login field"
   },
-  "registerLoginPrivacyHelper": "Used only to sign in. Other users won’t see it.",
+  "registerLoginPrivacyHelper": "Used only to sign in.",
   "@registerLoginPrivacyHelper": {
     "description": "Helper under the registration login field"
   },
@@ -224,7 +224,7 @@
   "@createAccount": {
     "description": "Main text in register screen"
   },
-  "createAccountDescription": "Step into the silent void of secure communication",
+  "createAccountDescription": "Sign up with your email in three short steps",
   "@createAccountDescription": {
     "description": "A text under a main text in register screen"
   },
@@ -252,7 +252,7 @@
   "@verifyEmailSubmit": {
     "description": "Primary button on the email verification screen"
   },
-  "verifyEmailDidNotReceive": "Didn't receive the signal?",
+  "verifyEmailDidNotReceive": "Didn't get the code?",
   "@verifyEmailDidNotReceive": {
     "description": "Prompt before the resend action on the email verification screen"
   },
@@ -276,7 +276,7 @@
   "@profileSetupMainText": {
     "description": "Main text in pofile setup screen"
   },
-  "profileSetupSecondText": "Complete your profile to join the void",
+  "profileSetupSecondText": "Complete your profile to finish signing up",
   "@profileSetupSecondText": {
     "description": "A text under main text in pofile setup screen"
   },
@@ -304,7 +304,7 @@
   "@profileSetupDisplayNameTooLong": {
     "description": "Validation: display name exceeds max length"
   },
-  "profileSetupHintText": "Your username and display name are public. You can change them later in settings.",
+  "profileSetupHintText": "Your username and display name are shown on your account page.",
   "@profileSetupHintText": {
     "description": "A note under forms with public users data"
   },
@@ -312,9 +312,9 @@
   "@completeSetup": {
     "description": "A text on a button to finish registration"
   },
-  "startChatting": "Start chatting",
-  "@startChatting": {
-    "description": "The text on a button to continue log in"
+  "welcomeSignIn": "Sign in",
+  "@welcomeSignIn": {
+    "description": "Welcome screen button that opens the sign-in screen"
   },
   "codeSent": "Code sent!",
   "@codeSent": {
@@ -327,5 +327,33 @@
   "loginEmailCodeResendTooSoon": "Wait until resend",
   "@loginEmailCodeResendTooSoon": {
     "description": "The warning when resend request is too early"
+  },
+  "passwordRecoveryUnavailable": "Password recovery isn't available in this demo",
+  "@passwordRecoveryUnavailable": {
+    "description": "Snack bar shown when \"Forgot password?\" is tapped"
+  },
+  "accountEmailLabel": "Email",
+  "@accountEmailLabel": {
+    "description": "Email row on the account screen"
+  },
+  "accountMemberSince": "Member since",
+  "@accountMemberSince": {
+    "description": "Registration date row on the account screen"
+  },
+  "logOut": "Log out",
+  "@logOut": {
+    "description": "Button on the account screen: end the current session"
+  },
+  "logOutAllDevices": "Log out of all devices",
+  "@logOutAllDevices": {
+    "description": "Button on the account screen: end every session of the user"
+  },
+  "retry": "Try again",
+  "@retry": {
+    "description": "Retry action after a failed request"
+  },
+  "sessionExpired": "Your session has expired. Sign in again.",
+  "@sessionExpired": {
+    "description": "Session failure: the token was rejected (UNAUTHORIZED)"
   }
 }

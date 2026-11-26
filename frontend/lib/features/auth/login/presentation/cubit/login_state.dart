@@ -1,5 +1,5 @@
-import 'package:void_chat/features/auth/login/domain/failures/login_failure.dart';
-import 'package:void_chat/features/auth/shared/domain/entities/user_entity.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/domain/failures/login_failure.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/domain/entities/user_entity.dart';
 
 sealed class LoginState {
   const LoginState();

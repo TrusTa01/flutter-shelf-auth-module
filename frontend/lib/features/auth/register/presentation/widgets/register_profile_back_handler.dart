@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:void_chat/core/extensions/l10n_ext.dart';
-import 'package:void_chat/features/auth/register/presentation/cubit/register_cubit.dart';
-import 'package:void_chat/features/auth/register/presentation/cubit/register_state.dart';
-import 'package:void_chat/features/auth/register/presentation/extensions/register_failure_message.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/ui_kits/app_snack_bar.dart';
-import 'package:void_chat/router/app_router.dart';
+import 'package:flutter_shelf_auth_module/core/extensions/l10n_ext.dart';
+import 'package:flutter_shelf_auth_module/features/auth/register/presentation/cubit/register_cubit.dart';
+import 'package:flutter_shelf_auth_module/features/auth/register/presentation/cubit/register_state.dart';
+import 'package:flutter_shelf_auth_module/features/auth/register/presentation/extensions/register_failure_message.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/ui_kits/app_snack_bar.dart';
+import 'package:flutter_shelf_auth_module/router/app_router.dart';
 
 Future<bool> showRegisterResetDialog(BuildContext context) {
   final l10n = context.l10n;

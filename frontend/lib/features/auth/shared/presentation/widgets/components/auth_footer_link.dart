@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/ui_kits/switch_link.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/ui_kits/switch_link.dart';
 
 class AuthFooterLink extends StatelessWidget {
   final String text;

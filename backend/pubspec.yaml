@@ -1,7 +1,7 @@
 name: backend
-description: A backend for a void chat.
+description: Dart shelf + PostgreSQL backend for a sign-up / sign-in module.
 version: 1.0.0
-repository: https://github.com/TrusTa01/void-chat
+repository: https://github.com/TrusTa01/flutter-shelf-auth-module
 
 environment:
   sdk: ^3.11.1

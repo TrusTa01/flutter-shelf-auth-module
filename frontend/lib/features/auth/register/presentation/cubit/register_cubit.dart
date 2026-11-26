@@ -1,14 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/domain/failures/login_failure.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/domain/use_cases/login_with_password_use_case.dart';
+import 'package:flutter_shelf_auth_module/features/auth/register/domain/failures/register_failure.dart';
+import 'package:flutter_shelf_auth_module/features/auth/register/domain/use_cases/cancel_registration_use_case.dart';
+import 'package:flutter_shelf_auth_module/features/auth/register/domain/use_cases/complete_registration_use_case.dart';
+import 'package:flutter_shelf_auth_module/features/auth/register/domain/use_cases/start_registration_use_case.dart';
+import 'package:flutter_shelf_auth_module/features/auth/register/domain/use_cases/verify_registration_email_use_case.dart';
+import 'package:flutter_shelf_auth_module/features/auth/register/presentation/cubit/register_state.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/cubit/auth_cubit.dart';
 import 'package:injectable/injectable.dart';
-import 'package:void_chat/features/auth/login/domain/failures/login_failure.dart';
-import 'package:void_chat/features/auth/login/domain/use_cases/login_with_password_use_case.dart';
-import 'package:void_chat/features/auth/register/domain/failures/register_failure.dart';
-import 'package:void_chat/features/auth/register/domain/use_cases/cancel_registration_use_case.dart';
-import 'package:void_chat/features/auth/register/domain/use_cases/complete_registration_use_case.dart';
-import 'package:void_chat/features/auth/register/domain/use_cases/start_registration_use_case.dart';
-import 'package:void_chat/features/auth/register/domain/use_cases/verify_registration_email_use_case.dart';
-import 'package:void_chat/features/auth/register/presentation/cubit/register_state.dart';
-import 'package:void_chat/features/auth/shared/presentation/cubit/auth_cubit.dart';
 
 @injectable
 class RegisterCubit extends Cubit<RegisterState> {

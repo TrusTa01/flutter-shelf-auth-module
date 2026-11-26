@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:void_chat/core/l10n/gen/app_localizations.dart';
+import 'package:flutter_shelf_auth_module/core/l10n/gen/app_localizations.dart';
 
 /// Mirrors [backend/lib/src/features/auth/domain/validators/new_user_validator.dart]
 /// and README: login identifier is the same `login` or `email` used at registration.

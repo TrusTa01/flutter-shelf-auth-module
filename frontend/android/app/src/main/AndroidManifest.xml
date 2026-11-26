@@ -14,7 +14,7 @@
         </intent>
     </queries>
     <application
-        android:label="void_chat"
+        android:label="Auth Module"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
         android:allowBackup="false"

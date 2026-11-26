@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:void_chat/core/extensions/l10n_ext.dart';
-import 'package:void_chat/features/auth/shared/presentation/validation/login_credentials_validation.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/sections/form_section.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/ui_kits/animated_button_text.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/ui_kits/auth_divider.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/ui_kits/loading_button.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/ui_kits/password_text_form_field.dart';
+import 'package:flutter_shelf_auth_module/core/extensions/l10n_ext.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/validation/login_credentials_validation.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/sections/form_section.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/ui_kits/animated_button_text.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/ui_kits/auth_divider.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/ui_kits/loading_button.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/ui_kits/password_text_form_field.dart';
 
 typedef LoginSubmitPassCallback =
     Future<void> Function(String identifier, String password);

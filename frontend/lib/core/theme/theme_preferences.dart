@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:void_chat/core/theme/palette/built_in_palettes.dart';
-import 'package:void_chat/core/theme/palette/palette_data.dart';
+import 'package:flutter_shelf_auth_module/core/theme/palette/built_in_palettes.dart';
+import 'package:flutter_shelf_auth_module/core/theme/palette/palette_data.dart';
 
 enum ThemeBrightnessPreference { system, light, dark }
 

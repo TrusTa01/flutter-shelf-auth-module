@@ -2,6 +2,9 @@ import 'package:backend/src/features/auth/shared/verify-email/domain/services/em
 import 'package:injectable/injectable.dart';
 import 'package:talker/talker.dart';
 
+// Dev-only: prints the code to the server log instead of sending an e-mail.
+// A real sender (SMTP, provider API) implements the same
+// EmailCodeSenderService interface and replaces this registration.
 @LazySingleton(as: EmailCodeSenderService)
 class DevEmailSender implements EmailCodeSenderService {
   final Talker _talker;

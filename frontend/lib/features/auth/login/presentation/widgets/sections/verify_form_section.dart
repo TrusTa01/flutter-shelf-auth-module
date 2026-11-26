@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_shelf_auth_module/core/extensions/l10n_ext.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/validation/verification_code_validation.dart';
 import 'package:pinput/pinput.dart';
-import 'package:void_chat/core/extensions/l10n_ext.dart';
-import 'package:void_chat/features/auth/shared/presentation/validation/verification_code_validation.dart';
 
 class VerifyFormSection extends HookWidget {
   final TextEditingController? controller;

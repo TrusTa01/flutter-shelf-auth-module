@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
+import 'package:flutter_shelf_auth_module/core/auth/infrastructure/i_session_expired_handler.dart';
+import 'package:flutter_shelf_auth_module/core/network/api_config.dart';
+import 'package:flutter_shelf_auth_module/core/network/interceptors/auth_interceptor.dart';
+import 'package:flutter_shelf_auth_module/core/network/interceptors/error_interceptor.dart';
+import 'package:flutter_shelf_auth_module/core/storage/secure_storage/app_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
-import 'package:void_chat/core/auth/infrastructure/i_session_expired_handler.dart';
-import 'package:void_chat/core/network/api_config.dart';
-import 'package:void_chat/core/network/interceptors/auth_interceptor.dart';
-import 'package:void_chat/core/network/interceptors/error_interceptor.dart';
-import 'package:void_chat/core/storage/secure_storage/app_secure_storage.dart';
 
 @lazySingleton
 class DioClient extends DioMixin implements Dio {

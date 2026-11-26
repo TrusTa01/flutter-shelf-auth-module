@@ -1,5 +1,5 @@
-import 'package:void_chat/core/l10n/gen/app_localizations.dart';
-import 'package:void_chat/features/auth/login/domain/failures/login_failure.dart';
+import 'package:flutter_shelf_auth_module/core/l10n/gen/app_localizations.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/domain/failures/login_failure.dart';
 
 extension LoginFailureMessage on LoginFailure {
   String messages(AppLocalizations l10n) => switch (this) {

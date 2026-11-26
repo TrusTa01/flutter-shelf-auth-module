@@ -1,4 +1,4 @@
-package com.yura.void_chat
+package com.yura.flutter_shelf_auth_module
 
 import io.flutter.embedding.android.FlutterActivity
 

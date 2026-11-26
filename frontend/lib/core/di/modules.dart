@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_shelf_auth_module/core/network/dio_client.dart';
+import 'package:flutter_shelf_auth_module/core/storage/secure_storage/secure_storage_factory.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talker_flutter/talker_flutter.dart';
-import 'package:void_chat/core/network/dio_client.dart';
-import 'package:void_chat/core/storage/secure_storage/secure_storage_factory.dart';
 
 @module
 abstract class RegisterModule {

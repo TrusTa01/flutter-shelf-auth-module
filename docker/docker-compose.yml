@@ -1,18 +1,47 @@
-name: void-chat
+name: auth-module
 
 services:
   postgres_db:
     image: postgres:16
     restart: always
-    container_name: void_chat_postgres_db
+    container_name: auth_postgres_db
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
     ports:
-      - "5432:5432"
+      # Host port is configurable in case a local PostgreSQL already uses 5432.
+      - "${DB_HOST_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      # SQL migrations are applied in file-name order on the first start
+      # (empty volume only). Apply later migrations manually.
+      - ../backend/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      # TCP check: during init the temporary server listens on the socket only,
+      # so this turns healthy after the migrations above have finished.
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  backend:
+    build:
+      context: ../backend
+    restart: unless-stopped
+    container_name: auth_backend
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=postgres_db
+      - DB_PORT=5432
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - PORT=8082
+    ports:
+      - "8082:8082"
 
 volumes:
   postgres_data:

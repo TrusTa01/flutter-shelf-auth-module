@@ -1,11 +1,11 @@
+import 'package:flutter_shelf_auth_module/core/network/mixins/api_request_handler_mixin.dart';
+import 'package:flutter_shelf_auth_module/core/storage/secure_storage/app_secure_storage.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/data/data_sources/login_remote_data_source.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/data/mappers/user_entity_mapper.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/data/models/login_response_dto.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/domain/repositories/i_login_repository.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/domain/entities/user_entity.dart';
 import 'package:injectable/injectable.dart';
-import 'package:void_chat/core/network/mixins/api_request_handler_mixin.dart';
-import 'package:void_chat/core/storage/secure_storage/app_secure_storage.dart';
-import 'package:void_chat/features/auth/login/data/data_sources/login_remote_data_source.dart';
-import 'package:void_chat/features/auth/login/data/mappers/user_entity_mapper.dart';
-import 'package:void_chat/features/auth/login/data/models/login_response_dto.dart';
-import 'package:void_chat/features/auth/login/domain/repositories/i_login_repository.dart';
-import 'package:void_chat/features/auth/shared/domain/entities/user_entity.dart';
 
 class ServerException {}
 

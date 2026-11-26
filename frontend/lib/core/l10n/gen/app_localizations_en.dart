@@ -9,11 +9,11 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Void';
+  String get appTitle => 'Auth Module';
 
   @override
   String get appDescription =>
-      'Your private space for <bold>secure</bold> and <bold>seamless</bold> communication';
+      'Sign up, verify your <bold>email</bold> and manage your <bold>sessions</bold>';
 
   @override
   String get paletteBrand => 'Brand';
@@ -34,7 +34,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get greeting => 'Welcome back';
 
   @override
-  String get greetingDescription => 'Step into the digital silence';
+  String get greetingDescription => 'Sign in to your account';
 
   @override
   String get continueAction => 'Continue';
@@ -55,7 +55,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dontHaveAcc => 'Don\'t have an account?';
 
   @override
-  String get singUp => 'Sing up';
+  String get signUp => 'Sign up';
 
   @override
   String get logIn => 'Log in';
@@ -134,17 +134,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registerEmailLabel => 'Email';
 
   @override
-  String get registerEmailHint => 'you@void.com';
+  String get registerEmailHint => 'you@example.com';
 
   @override
   String get registerLoginLabel => 'Login';
 
   @override
-  String get registerLoginHint => 'void_explorer';
+  String get registerLoginHint => 'john_doe';
 
   @override
-  String get registerLoginPrivacyHelper =>
-      'Used only to sign in. Other users won’t see it.';
+  String get registerLoginPrivacyHelper => 'Used only to sign in.';
 
   @override
   String get registerPasswordHint => 'NebulaStorm42';
@@ -191,7 +190,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get createAccountDescription =>
-      'Step into the silent void of secure communication';
+      'Sign up with your email in three short steps';
 
   @override
   String get alreadyHaveAnAccount => 'Already have an account?';
@@ -212,7 +211,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verifyEmailSubmit => 'Verify';
 
   @override
-  String get verifyEmailDidNotReceive => 'Didn\'t receive the signal?';
+  String get verifyEmailDidNotReceive => 'Didn\'t get the code?';
 
   @override
   String get verifyEmailResendCode => 'Resend code';
@@ -230,7 +229,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileSetupMainText => 'One last step';
 
   @override
-  String get profileSetupSecondText => 'Complete your profile to join the void';
+  String get profileSetupSecondText =>
+      'Complete your profile to finish signing up';
 
   @override
   String get profileSetupUsernameLabel => 'Username';
@@ -252,13 +252,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileSetupHintText =>
-      'Your username and display name are public. You can change them later in settings.';
+      'Your username and display name are shown on your account page.';
 
   @override
   String get completeSetup => 'Complete setup';
 
   @override
-  String get startChatting => 'Start chatting';
+  String get welcomeSignIn => 'Sign in';
 
   @override
   String get codeSent => 'Code sent!';
@@ -268,4 +268,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loginEmailCodeResendTooSoon => 'Wait until resend';
+
+  @override
+  String get passwordRecoveryUnavailable =>
+      'Password recovery isn\'t available in this demo';
+
+  @override
+  String get accountEmailLabel => 'Email';
+
+  @override
+  String get accountMemberSince => 'Member since';
+
+  @override
+  String get logOut => 'Log out';
+
+  @override
+  String get logOutAllDevices => 'Log out of all devices';
+
+  @override
+  String get retry => 'Try again';
+
+  @override
+  String get sessionExpired => 'Your session has expired. Sign in again.';
 }

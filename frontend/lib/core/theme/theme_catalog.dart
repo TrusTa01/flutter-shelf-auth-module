@@ -1,9 +1,10 @@
+import 'package:flutter/cupertino.dart' show CupertinoPageTransitionsBuilder;
 import 'package:flutter/material.dart';
-import 'package:void_chat/core/theme/app_bar_theme.dart';
-import 'package:void_chat/core/theme/app_colors.dart';
-import 'package:void_chat/core/theme/app_snack_bar_theme.dart';
-import 'package:void_chat/core/theme/palette/palette_data.dart';
-import 'package:void_chat/core/theme/text_theme.dart';
+import 'package:flutter_shelf_auth_module/core/theme/app_bar_theme.dart';
+import 'package:flutter_shelf_auth_module/core/theme/app_colors.dart';
+import 'package:flutter_shelf_auth_module/core/theme/app_snack_bar_theme.dart';
+import 'package:flutter_shelf_auth_module/core/theme/palette/palette_data.dart';
+import 'package:flutter_shelf_auth_module/core/theme/text_theme.dart';
 
 typedef ThemePair = ({ThemeData light, ThemeData dark});
 

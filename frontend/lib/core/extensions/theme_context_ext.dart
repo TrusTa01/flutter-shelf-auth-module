@@ -10,10 +10,6 @@ extension ThemeContextExt on BuildContext {
       ? 'assets/images/logo/app_icon/app_logo_foreground_light.png'
       : 'assets/images/logo/app_icon/app_logo_foreground_dark.png';
 
-  String get logoPath => isLight
-      ? 'assets/images/logo/logo_light.png'
-      : 'assets/images/logo/logo_dark.png';
-
   String get portalImagePath => isLight
       ? 'assets/images/portal_log_in_light.png'
       : 'assets/images/portal_log_in_dark.png';

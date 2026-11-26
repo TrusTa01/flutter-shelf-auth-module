@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_shelf_auth_module/core/extensions/l10n_ext.dart';
+import 'package:flutter_shelf_auth_module/core/extensions/theme_context_ext.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/ui_kits/theme_switcher_icon.dart';
+import 'package:flutter_shelf_auth_module/router/app_router.dart';
 import 'package:styled_text/styled_text.dart';
-import 'package:void_chat/core/extensions/l10n_ext.dart';
-import 'package:void_chat/core/extensions/theme_context_ext.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/ui_kits/theme_switcher_icon.dart';
-import 'package:void_chat/router/app_router.dart';
 
 @RoutePage()
 class WelcomeScreen extends StatelessWidget {
@@ -97,7 +97,7 @@ class WelcomeScreen extends StatelessWidget {
                             FilledButton(
                               onPressed: () =>
                                   context.router.push(const LoginRoute()),
-                              child: Text(l10n.startChatting),
+                              child: Text(l10n.welcomeSignIn),
                             ),
                           ],
                         ),

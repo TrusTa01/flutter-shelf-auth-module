@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:void_chat/core/theme/app_colors.dart';
+import 'package:flutter_shelf_auth_module/core/theme/app_colors.dart';
 
 SnackBarThemeData buildSnackBarTheme({
   required ColorScheme colorScheme,

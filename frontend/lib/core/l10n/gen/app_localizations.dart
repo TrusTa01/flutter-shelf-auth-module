@@ -101,13 +101,13 @@ abstract class AppLocalizations {
   /// App title in app bar and system
   ///
   /// In en, this message translates to:
-  /// **'Void'**
+  /// **'Auth Module'**
   String get appTitle;
 
   /// Full description on welcome screen
   ///
   /// In en, this message translates to:
-  /// **'Your private space for <bold>secure</bold> and <bold>seamless</bold> communication'**
+  /// **'Sign up, verify your <bold>email</bold> and manage your <bold>sessions</bold>'**
   String get appDescription;
 
   /// Built-in palette name: Brand
@@ -149,7 +149,7 @@ abstract class AppLocalizations {
   /// A text under a greeting in login screen
   ///
   /// In en, this message translates to:
-  /// **'Step into the digital silence'**
+  /// **'Sign in to your account'**
   String get greetingDescription;
 
   /// Continue action
@@ -188,11 +188,11 @@ abstract class AppLocalizations {
   /// **'Don\'t have an account?'**
   String get dontHaveAcc;
 
-  /// Sing up redirect
+  /// Sign up redirect
   ///
   /// In en, this message translates to:
-  /// **'Sing up'**
-  String get singUp;
+  /// **'Sign up'**
+  String get signUp;
 
   /// A text for a button to log in into app
   ///
@@ -335,7 +335,7 @@ abstract class AppLocalizations {
   /// Placeholder example for the registration email field
   ///
   /// In en, this message translates to:
-  /// **'you@void.com'**
+  /// **'you@example.com'**
   String get registerEmailHint;
 
   /// Label for the login handle on registration
@@ -347,13 +347,13 @@ abstract class AppLocalizations {
   /// Placeholder example for the registration login field
   ///
   /// In en, this message translates to:
-  /// **'void_explorer'**
+  /// **'john_doe'**
   String get registerLoginHint;
 
   /// Helper under the registration login field
   ///
   /// In en, this message translates to:
-  /// **'Used only to sign in. Other users won’t see it.'**
+  /// **'Used only to sign in.'**
   String get registerLoginPrivacyHelper;
 
   /// Placeholder example for password on registration
@@ -437,7 +437,7 @@ abstract class AppLocalizations {
   /// A text under a main text in register screen
   ///
   /// In en, this message translates to:
-  /// **'Step into the silent void of secure communication'**
+  /// **'Sign up with your email in three short steps'**
   String get createAccountDescription;
 
   /// A redirect to a login screen
@@ -479,7 +479,7 @@ abstract class AppLocalizations {
   /// Prompt before the resend action on the email verification screen
   ///
   /// In en, this message translates to:
-  /// **'Didn\'t receive the signal?'**
+  /// **'Didn\'t get the code?'**
   String get verifyEmailDidNotReceive;
 
   /// Tappable action to resend the verification code
@@ -515,7 +515,7 @@ abstract class AppLocalizations {
   /// A text under main text in pofile setup screen
   ///
   /// In en, this message translates to:
-  /// **'Complete your profile to join the void'**
+  /// **'Complete your profile to finish signing up'**
   String get profileSetupSecondText;
 
   /// Label for username field on profile setup
@@ -557,7 +557,7 @@ abstract class AppLocalizations {
   /// A note under forms with public users data
   ///
   /// In en, this message translates to:
-  /// **'Your username and display name are public. You can change them later in settings.'**
+  /// **'Your username and display name are shown on your account page.'**
   String get profileSetupHintText;
 
   /// A text on a button to finish registration
@@ -566,11 +566,11 @@ abstract class AppLocalizations {
   /// **'Complete setup'**
   String get completeSetup;
 
-  /// The text on a button to continue log in
+  /// Welcome screen button that opens the sign-in screen
   ///
   /// In en, this message translates to:
-  /// **'Start chatting'**
-  String get startChatting;
+  /// **'Sign in'**
+  String get welcomeSignIn;
 
   /// A snack bar message that appears when user request the code
   ///
@@ -589,6 +589,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Wait until resend'**
   String get loginEmailCodeResendTooSoon;
+
+  /// Snack bar shown when "Forgot password?" is tapped
+  ///
+  /// In en, this message translates to:
+  /// **'Password recovery isn\'t available in this demo'**
+  String get passwordRecoveryUnavailable;
+
+  /// Email row on the account screen
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get accountEmailLabel;
+
+  /// Registration date row on the account screen
+  ///
+  /// In en, this message translates to:
+  /// **'Member since'**
+  String get accountMemberSince;
+
+  /// Button on the account screen: end the current session
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get logOut;
+
+  /// Button on the account screen: end every session of the user
+  ///
+  /// In en, this message translates to:
+  /// **'Log out of all devices'**
+  String get logOutAllDevices;
+
+  /// Retry action after a failed request
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get retry;
+
+  /// Session failure: the token was rejected (UNAUTHORIZED)
+  ///
+  /// In en, this message translates to:
+  /// **'Your session has expired. Sign in again.'**
+  String get sessionExpired;
 }
 
 class _AppLocalizationsDelegate

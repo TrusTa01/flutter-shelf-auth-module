@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/data/models/login_response_dto.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/data/auth_api_path_enum.dart';
 import 'package:injectable/injectable.dart';
-import 'package:void_chat/features/auth/login/data/models/login_response_dto.dart';
-import 'package:void_chat/features/auth/shared/data/auth_api_path_enum.dart';
 
 @lazySingleton
 class LoginRemoteDataSource {

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:void_chat/core/extensions/l10n_ext.dart';
-import 'package:void_chat/core/theme/palette/palette_data.dart';
+import 'package:flutter_shelf_auth_module/core/extensions/l10n_ext.dart';
+import 'package:flutter_shelf_auth_module/core/theme/palette/palette_data.dart';
 
 String paletteTitle(BuildContext context, PaletteData palette) {
   if (!palette.isBuiltIn) return palette.name;

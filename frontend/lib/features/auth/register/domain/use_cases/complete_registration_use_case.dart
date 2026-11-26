@@ -1,6 +1,6 @@
+import 'package:flutter_shelf_auth_module/features/auth/register/domain/repositories/i_register_repository.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/domain/entities/user_entity.dart';
 import 'package:injectable/injectable.dart';
-import 'package:void_chat/features/auth/register/domain/repositories/i_register_repository.dart';
-import 'package:void_chat/features/auth/shared/domain/entities/user_entity.dart';
 
 abstract interface class ICompleteRegistrationUseCase {
   Future<UserEntity> call({

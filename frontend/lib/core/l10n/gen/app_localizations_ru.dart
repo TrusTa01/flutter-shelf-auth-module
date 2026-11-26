@@ -9,11 +9,11 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
-  String get appTitle => 'Void';
+  String get appTitle => 'Auth Module';
 
   @override
   String get appDescription =>
-      'Ваше личное пространство для безопасного и бесперебойного общения';
+      'Регистрация, подтверждение <bold>почты</bold> и управление <bold>сессиями</bold>';
 
   @override
   String get paletteBrand => 'Бренд';
@@ -34,7 +34,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get greeting => 'С возвращением';
 
   @override
-  String get greetingDescription => 'Погрузись в цифровую тишину';
+  String get greetingDescription => 'Войдите в свой аккаунт';
 
   @override
   String get continueAction => 'Продолжить';
@@ -55,7 +55,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dontHaveAcc => 'Нет аккаунта?';
 
   @override
-  String get singUp => 'Зарегистрироваться';
+  String get signUp => 'Зарегистрироваться';
 
   @override
   String get logIn => 'Войти';
@@ -132,17 +132,17 @@ class AppLocalizationsRu extends AppLocalizations {
   String get registerEmailLabel => 'Почта';
 
   @override
-  String get registerEmailHint => 'friend@void.net';
+  String get registerEmailHint => 'you@example.com';
 
   @override
   String get registerLoginLabel => 'Логин';
 
   @override
-  String get registerLoginHint => 'cosmo_wanderer';
+  String get registerLoginHint => 'john_doe';
 
   @override
   String get registerLoginPrivacyHelper =>
-      'Только для входа в аккаунт, другие пользователи его не увидят';
+      'Используется только для входа в аккаунт';
 
   @override
   String get registerPasswordHint => 'Туманность42';
@@ -187,7 +187,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get createAccountDescription =>
-      'Окунитесь в безмолвную пустоту защищенной связи';
+      'Регистрация по почте в три коротких шага';
 
   @override
   String get alreadyHaveAnAccount => 'Уже есть аккаунт?';
@@ -228,7 +228,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get profileSetupSecondText =>
-      'Завершите настройку вашего профиля чтобы присоединиться к void';
+      'Заполните профиль, чтобы завершить регистрацию';
 
   @override
   String get profileSetupUsernameLabel => 'Юзернейм';
@@ -250,13 +250,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get profileSetupHintText =>
-      'Ваш юзернейм и отображаемое имя публичные. Вы можете изменить из позже в настройках';
+      'Юзернейм и отображаемое имя видны на странице аккаунта';
 
   @override
   String get completeSetup => 'Завершить настройку';
 
   @override
-  String get startChatting => 'Начать общение';
+  String get welcomeSignIn => 'Войти';
 
   @override
   String get codeSent => 'Код отправлен!';
@@ -267,4 +267,26 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get loginEmailCodeResendTooSoon =>
       'Подождите перед повторной отправкой';
+
+  @override
+  String get passwordRecoveryUnavailable =>
+      'Восстановление пароля недоступно в этой демо-версии';
+
+  @override
+  String get accountEmailLabel => 'Почта';
+
+  @override
+  String get accountMemberSince => 'Аккаунт создан';
+
+  @override
+  String get logOut => 'Выйти';
+
+  @override
+  String get logOutAllDevices => 'Выйти на всех устройствах';
+
+  @override
+  String get retry => 'Повторить';
+
+  @override
+  String get sessionExpired => 'Сессия истекла. Войдите снова.';
 }

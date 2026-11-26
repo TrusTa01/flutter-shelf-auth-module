@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+.dart_tool/
+build/
+.cursor/
+.idea/
+.vscode/
+postman/
+test/
+*.exe
+bin/server

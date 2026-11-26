@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:void_chat/core/extensions/theme_context_ext.dart';
-import 'package:void_chat/core/theme/cubit/theme_cubit.dart';
-import 'package:void_chat/core/theme/theme_preferences.dart';
+import 'package:flutter_shelf_auth_module/core/extensions/theme_context_ext.dart';
+import 'package:flutter_shelf_auth_module/core/theme/cubit/theme_cubit.dart';
+import 'package:flutter_shelf_auth_module/core/theme/theme_preferences.dart';
 
 class ThemeSwitcherIcon extends StatelessWidget {
   const ThemeSwitcherIcon({super.key});

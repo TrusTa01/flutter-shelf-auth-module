@@ -1,5 +1,5 @@
+import 'package:flutter_shelf_auth_module/features/auth/shared/data/models/user/user_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:void_chat/features/auth/shared/data/models/user/user_dto.dart';
 
 part 'login_response_dto.freezed.dart';
 part 'login_response_dto.g.dart';

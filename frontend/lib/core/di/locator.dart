@@ -1,11 +1,11 @@
+import 'package:flutter_shelf_auth_module/core/di/locator.config.dart';
+import 'package:flutter_shelf_auth_module/core/theme/theme_controller.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/presentation/cubit/login_cubit.dart';
+import 'package:flutter_shelf_auth_module/features/auth/register/presentation/cubit/register_cubit.dart';
+import 'package:flutter_shelf_auth_module/router/app_router.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:talker_flutter/talker_flutter.dart';
-import 'package:void_chat/core/di/locator.config.dart';
-import 'package:void_chat/core/theme/theme_controller.dart';
-import 'package:void_chat/features/auth/login/presentation/cubit/login_cubit.dart';
-import 'package:void_chat/features/auth/register/presentation/cubit/register_cubit.dart';
-import 'package:void_chat/router/app_router.dart';
 
 final getIt = GetIt.instance;
 

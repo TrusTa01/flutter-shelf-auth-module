@@ -11,17 +11,17 @@
 part of 'app_router.dart';
 
 /// generated route for
-/// [AppLayoutScreen]
-class AppLayoutRoute extends PageRouteInfo<void> {
-  const AppLayoutRoute({List<PageRouteInfo>? children})
-    : super(AppLayoutRoute.name, initialChildren: children);
+/// [AccountScreen]
+class AccountRoute extends PageRouteInfo<void> {
+  const AccountRoute({List<PageRouteInfo>? children})
+    : super(AccountRoute.name, initialChildren: children);
 
-  static const String name = 'AppLayoutRoute';
+  static const String name = 'AccountRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const AppLayoutScreen();
+      return const AccountScreen();
     },
   );
 }
@@ -87,22 +87,6 @@ class EmailConfirmRouteArgs {
 
   @override
   int get hashCode => key.hashCode ^ identifier.hashCode;
-}
-
-/// generated route for
-/// [HomeScreen]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
-    : super(HomeRoute.name, initialChildren: children);
-
-  static const String name = 'HomeRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const HomeScreen();
-    },
-  );
 }
 
 /// generated route for

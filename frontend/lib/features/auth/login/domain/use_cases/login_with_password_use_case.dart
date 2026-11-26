@@ -1,6 +1,6 @@
+import 'package:flutter_shelf_auth_module/features/auth/login/domain/repositories/i_login_repository.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/domain/entities/user_entity.dart';
 import 'package:injectable/injectable.dart';
-import 'package:void_chat/features/auth/login/domain/repositories/i_login_repository.dart';
-import 'package:void_chat/features/auth/shared/domain/entities/user_entity.dart';
 
 abstract interface class ILoginWithPasswordUseCase {
   Future<UserEntity> call(String identifier, String password);

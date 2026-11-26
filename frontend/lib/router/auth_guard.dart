@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/cubit/auth_cubit.dart';
+import 'package:flutter_shelf_auth_module/router/app_router.dart';
 import 'package:injectable/injectable.dart';
-import 'package:void_chat/features/auth/shared/presentation/cubit/auth_cubit.dart';
-import 'package:void_chat/router/app_router.dart';
 
 @lazySingleton
 class AuthGuard extends AutoRouteGuard {

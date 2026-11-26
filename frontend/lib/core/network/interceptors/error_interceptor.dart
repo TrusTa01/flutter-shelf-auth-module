@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:void_chat/core/auth/infrastructure/i_session_expired_handler.dart';
-import 'package:void_chat/core/network/errors/api_exception.dart';
+import 'package:flutter_shelf_auth_module/core/auth/infrastructure/i_session_expired_handler.dart';
+import 'package:flutter_shelf_auth_module/core/network/errors/api_exception.dart';
 
 class ErrorInterceptor extends Interceptor {
   final ISessionExpiredHandler _sessionExpired;

@@ -1,6 +1,6 @@
+import 'package:backend/src/core/config/db_config.dart';
 import 'package:injectable/injectable.dart';
 import 'package:postgres/postgres.dart';
-import 'package:dotenv/dotenv.dart' as dotenv;
 import 'package:shelf_router/shelf_router.dart';
 import 'package:talker/talker.dart';
 
@@ -13,15 +13,16 @@ abstract class RegisterModule {
   Talker get talker => Talker();
 
   @lazySingleton
-  Pool<Connection> get pool {
-    final dotEnv = dotenv.DotEnv(includePlatformEnvironment: true)..load();
+  DbConfig get dbConfig => DbConfig.fromEnvironment(readEnvironment());
 
+  @lazySingleton
+  Pool<Connection> pool(DbConfig config) {
     final endpoint = Endpoint(
-      host: dotEnv['DB_HOST'] ?? 'localhost',
-      port: int.parse(dotEnv['DB_PORT'] ?? '5432'),
-      database: dotEnv['DB_NAME']!,
-      username: dotEnv['DB_USER']!,
-      password: dotEnv['DB_PASSWORD']!,
+      host: config.host,
+      port: config.port,
+      database: config.database,
+      username: config.username,
+      password: config.password,
     );
 
     return Pool.withEndpoints([

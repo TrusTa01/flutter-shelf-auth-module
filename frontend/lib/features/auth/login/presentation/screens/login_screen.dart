@@ -1,17 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:void_chat/core/extensions/l10n_ext.dart';
-import 'package:void_chat/core/layouts/auth_layout.dart';
-import 'package:void_chat/features/auth/login/presentation/cubit/login_cubit.dart';
-import 'package:void_chat/features/auth/login/presentation/cubit/login_state.dart';
-import 'package:void_chat/features/auth/login/presentation/extensions/login_failure_message.dart';
-import 'package:void_chat/features/auth/login/presentation/widgets/sections/login_form_section.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/components/auth_body.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/components/auth_footer_link.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/components/auth_header.dart';
-import 'package:void_chat/features/auth/shared/presentation/widgets/ui_kits/app_snack_bar.dart';
-import 'package:void_chat/router/app_router.dart';
+import 'package:flutter_shelf_auth_module/core/extensions/l10n_ext.dart';
+import 'package:flutter_shelf_auth_module/core/layouts/auth_layout.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/presentation/cubit/login_cubit.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/presentation/cubit/login_state.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/presentation/extensions/login_failure_message.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/presentation/widgets/sections/login_form_section.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/components/auth_body.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/components/auth_footer_link.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/components/auth_header.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/presentation/widgets/ui_kits/app_snack_bar.dart';
+import 'package:flutter_shelf_auth_module/router/app_router.dart';
 
 @RoutePage()
 class LoginScreen extends StatelessWidget {
@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
       listener: (context, state) {
         switch (state) {
           case LoginSuccess():
-            context.router.replaceAll([const AppLayoutRoute()]);
+            context.router.replaceAll([const AccountRoute()]);
           case LoginError(:final failure):
             context.showAppSnackBar(failure.messages(l10n));
           case LoginCodeSent(:final identifier):
@@ -62,6 +62,10 @@ class LoginScreen extends StatelessWidget {
                   loginCubit.loginWithPass(identifier, password),
               onEmailConfirmTap: (email) async =>
                   loginCubit.loginWithcode(email),
+              // Password recovery is intentionally out of scope for this
+              // module: the link stays, but only explains that.
+              onRecoverPasswordTap: () =>
+                  context.showAppSnackBar(l10n.passwordRecoveryUnavailable),
             ),
           ],
         );
@@ -69,7 +73,7 @@ class LoginScreen extends StatelessWidget {
         // Footer (to register screen)
         final footer = AuthFooterLink(
           text: l10n.dontHaveAcc,
-          linkText: l10n.singUp,
+          linkText: l10n.signUp,
           onTap: () => context.router.push(const RegisterRoute()),
         );
 

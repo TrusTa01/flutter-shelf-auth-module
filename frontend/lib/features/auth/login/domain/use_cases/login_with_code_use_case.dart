@@ -1,5 +1,5 @@
+import 'package:flutter_shelf_auth_module/features/auth/login/domain/repositories/i_login_repository.dart';
 import 'package:injectable/injectable.dart';
-import 'package:void_chat/features/auth/login/domain/repositories/i_login_repository.dart';
 
 abstract interface class ILoginWithCodeUseCase {
   Future<void> call(String identifier);

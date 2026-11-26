@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shelf_auth_module/core/storage/shared_preferences/app_prefs.dart';
+import 'package:flutter_shelf_auth_module/core/theme/palette/built_in_palettes.dart';
+import 'package:flutter_shelf_auth_module/core/theme/palette/palette_data.dart';
+import 'package:flutter_shelf_auth_module/core/theme/theme_preferences.dart';
 import 'package:injectable/injectable.dart';
-import 'package:void_chat/core/storage/shared_preferences/app_prefs.dart';
-import 'package:void_chat/core/theme/palette/built_in_palettes.dart';
-import 'package:void_chat/core/theme/palette/palette_data.dart';
-import 'package:void_chat/core/theme/theme_preferences.dart';
 
 @injectable
 class ThemeCubit extends Cubit<ThemePreferences> {

@@ -1,6 +1,6 @@
 {
-    "name": "void_chat",
-    "short_name": "void_chat",
+    "name": "Auth Module",
+    "short_name": "Auth Module",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#000000",

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:void_chat/app/app.dart';
-import 'package:void_chat/app/app_providers.dart';
-import 'package:void_chat/core/di/locator.dart';
+import 'package:flutter_shelf_auth_module/app/app.dart';
+import 'package:flutter_shelf_auth_module/app/app_providers.dart';
+import 'package:flutter_shelf_auth_module/core/di/locator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,7 +10,7 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: AppProviders.providers,
-      child: const VoidChat(),
+      child: const AuthModuleApp(),
     ),
   );
 }

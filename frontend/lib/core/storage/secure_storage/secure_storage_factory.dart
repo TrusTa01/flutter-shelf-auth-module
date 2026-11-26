@@ -10,7 +10,7 @@ class SecureStorageFactory {
       ),
       iOptions: IOSOptions(
         accessibility: KeychainAccessibility.first_unlock,
-        groupId: 'group.com.void.chat.app',
+        groupId: 'group.com.yura.flutter_shelf_auth_module',
       ),
     );
   }

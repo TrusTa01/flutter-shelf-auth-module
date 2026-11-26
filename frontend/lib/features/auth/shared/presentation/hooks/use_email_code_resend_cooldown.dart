@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:void_chat/features/auth/shared/constants/email_code_resend.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/constants/email_code_resend.dart';
 
 class EmailCodeResendCooldown {
   final bool canResend;

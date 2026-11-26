@@ -1,4 +1,4 @@
-import 'package:void_chat/core/l10n/gen/app_localizations.dart';
+import 'package:flutter_shelf_auth_module/core/l10n/gen/app_localizations.dart';
 
 /// Matches [backend/lib/src/features/auth/shared/services/email_code.dart].
 const int verificationCodeLength = 4;

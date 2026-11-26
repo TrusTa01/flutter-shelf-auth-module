@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.yura.void_chat"
+    namespace = "com.yura.flutter_shelf_auth_module"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -20,7 +20,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.yura.void_chat"
+        applicationId = "com.yura.flutter_shelf_auth_module"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

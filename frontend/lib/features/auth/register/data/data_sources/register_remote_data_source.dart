@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_shelf_auth_module/features/auth/register/data/models/start/start_registration_response_dto.dart';
+import 'package:flutter_shelf_auth_module/features/auth/register/data/models/verify/verify_email_response_dto.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/data/auth_api_path_enum.dart';
+import 'package:flutter_shelf_auth_module/features/auth/shared/data/models/user/user_dto.dart';
 import 'package:injectable/injectable.dart';
-import 'package:void_chat/features/auth/register/data/models/start/start_registration_response_dto.dart';
-import 'package:void_chat/features/auth/register/data/models/verify/verify_email_response_dto.dart';
-import 'package:void_chat/features/auth/shared/data/auth_api_path_enum.dart';
-import 'package:void_chat/features/auth/shared/data/models/user/user_dto.dart';
 
 @lazySingleton
 class RegisterRemoteDataSource {

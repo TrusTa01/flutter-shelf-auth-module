@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:void_chat/core/storage/secure_storage/app_secure_storage.dart';
+import 'package:flutter_shelf_auth_module/core/storage/secure_storage/app_secure_storage.dart';
 
 class AuthInterceptor extends QueuedInterceptor {
   final AppSecureStorage _storage;

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:void_chat/core/network/errors/api_exception.dart';
-import 'package:void_chat/features/auth/login/domain/failures/login_failure.dart';
+import 'package:flutter_shelf_auth_module/core/network/errors/api_exception.dart';
+import 'package:flutter_shelf_auth_module/features/auth/login/domain/failures/login_failure.dart';
 
 mixin ApiRequestHandler {
   Future<E> safeApiCall<T, E>({

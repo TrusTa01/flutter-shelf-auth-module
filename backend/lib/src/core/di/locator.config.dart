@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:backend/src/app_module.dart' as _i371;
+import 'package:backend/src/core/config/db_config.dart' as _i345;
 import 'package:backend/src/core/di/modules.dart' as _i148;
 import 'package:backend/src/features/auth/auth_controller.dart' as _i48;
 import 'package:backend/src/features/auth/login/password/data/repositories/postgres_session_repository.dart'
@@ -96,7 +97,7 @@ extension GetItInjectableX on _i174.GetIt {
     final registerModule = _$RegisterModule();
     gh.lazySingleton<_i278.Router>(() => registerModule.router);
     gh.lazySingleton<_i993.Talker>(() => registerModule.talker);
-    gh.lazySingleton<_i103.Pool<_i103.Connection>>(() => registerModule.pool);
+    gh.lazySingleton<_i345.DbConfig>(() => registerModule.dbConfig);
     gh.lazySingleton<_i1067.EmailCodeResendPolicy>(
       () => _i1067.EmailCodeResendPolicy(),
     );
@@ -131,18 +132,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i443.EmailPolicy>(),
       ),
     );
-    gh.lazySingleton<_i361.IUserRepository>(
-      () => _i374.PostgresUserRepository(gh<_i103.Pool<_i103.Connection>>()),
-    );
-    gh.lazySingleton<_i820.IRequestLoginRepository>(
-      () => _i701.RequestLoginRepository(gh<_i103.Pool<_i103.Connection>>()),
-    );
-    gh.lazySingleton<_i672.IVerifyLoginEmailRepository>(
-      () =>
-          _i919.VerifyLoginEmailRepository(gh<_i103.Pool<_i103.Connection>>()),
-    );
-    gh.lazySingleton<_i310.ICompleteProfileRepository>(
-      () => _i994.CompleteProfileRepository(gh<_i103.Pool<_i103.Connection>>()),
+    gh.lazySingleton<_i103.Pool<_i103.Connection>>(
+      () => registerModule.pool(gh<_i345.DbConfig>()),
     );
     gh.lazySingleton<_i754.ISessionRepository>(
       () => _i674.PostgresSessionRepository(gh<_i103.Pool<_i103.Connection>>()),
@@ -159,6 +150,43 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i344.VerifyRegistrationEmailRepository(
         gh<_i103.Pool<_i103.Connection>>(),
       ),
+    );
+    gh.lazySingleton<_i151.ILogoutAllUseCase>(
+      () => _i151.LogoutAllUseCase(gh<_i754.ISessionRepository>()),
+    );
+    gh.lazySingleton<_i517.IStartRegistrationUseCase>(
+      () => _i517.StartRegistrationUseCase(
+        gh<_i476.IStartRegistrationValidateUseCase>(),
+        gh<_i770.PasswordHasher>(),
+        gh<_i606.EmailCodeService>(),
+        gh<_i449.IPendingRegistrationRepository>(),
+        gh<_i1067.EmailCodeSenderService>(),
+      ),
+    );
+    gh.lazySingleton<_i281.ILogoutUseCase>(
+      () => _i281.LogoutUseCase(
+        gh<_i375.SessionToken>(),
+        gh<_i754.ISessionRepository>(),
+      ),
+    );
+    gh.lazySingleton<_i136.IVerifyRegistrationEmailUseCase>(
+      () => _i136.VerifyRegistrationEmailUseCase(
+        gh<_i344.IVerifyRegistrationEmailRepository>(),
+        gh<_i606.EmailCodeService>(),
+      ),
+    );
+    gh.lazySingleton<_i361.IUserRepository>(
+      () => _i374.PostgresUserRepository(gh<_i103.Pool<_i103.Connection>>()),
+    );
+    gh.lazySingleton<_i820.IRequestLoginRepository>(
+      () => _i701.RequestLoginRepository(gh<_i103.Pool<_i103.Connection>>()),
+    );
+    gh.lazySingleton<_i672.IVerifyLoginEmailRepository>(
+      () =>
+          _i919.VerifyLoginEmailRepository(gh<_i103.Pool<_i103.Connection>>()),
+    );
+    gh.lazySingleton<_i310.ICompleteProfileRepository>(
+      () => _i994.CompleteProfileRepository(gh<_i103.Pool<_i103.Connection>>()),
     );
     gh.lazySingleton<_i1050.ICreateSessionTokenUseCase>(
       () => _i1050.CreateSessionTokenUseCase(
@@ -186,30 +214,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i64.IGetCurrentUserUseCase>(
       () => _i64.GetCurrentUserUseCase(gh<_i361.IUserRepository>()),
-    );
-    gh.lazySingleton<_i151.ILogoutAllUseCase>(
-      () => _i151.LogoutAllUseCase(gh<_i754.ISessionRepository>()),
-    );
-    gh.lazySingleton<_i517.IStartRegistrationUseCase>(
-      () => _i517.StartRegistrationUseCase(
-        gh<_i476.IStartRegistrationValidateUseCase>(),
-        gh<_i770.PasswordHasher>(),
-        gh<_i606.EmailCodeService>(),
-        gh<_i449.IPendingRegistrationRepository>(),
-        gh<_i1067.EmailCodeSenderService>(),
-      ),
-    );
-    gh.lazySingleton<_i281.ILogoutUseCase>(
-      () => _i281.LogoutUseCase(
-        gh<_i375.SessionToken>(),
-        gh<_i754.ISessionRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i136.IVerifyRegistrationEmailUseCase>(
-      () => _i136.VerifyRegistrationEmailUseCase(
-        gh<_i344.IVerifyRegistrationEmailRepository>(),
-        gh<_i606.EmailCodeService>(),
-      ),
     );
     gh.lazySingleton<_i717.ICompleteRegistrationProfileUseCase>(
       () => _i717.CompleteRegistrationProfileUseCase(
