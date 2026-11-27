@@ -57,3 +57,7 @@ frontend/*.freezed.dart
 # ------- Backend -------
 bin/*.exe
 *.exe
+
+# ------- Local AI tool files -------
+ruvector.db
+.cursorignore
