@@ -1,58 +1,67 @@
-# Void backend
+# Auth backend (Dart, shelf)
 
-Dart backend that powers the Void chat app.
+Backend of the auth module: registration with e-mail confirmation, sign-in by password or one-time code, server-side sessions. Dart 3.11, `shelf`, PostgreSQL 16. The client is in [`../frontend`](../frontend); the overview is in the [root README](../README.md).
 
-## Run locally
+## Run
+
+**With Docker (recommended).** From the repository root:
 
 ```bash
-# 1. PostgreSQL must be running with migrations applied (see Database schema).
+cd docker
+cp .env.example .env
+docker compose up --build
+```
 
-# 2. Configure credentials.
-cp .env.example .env  # then edit DB_USER / DB_PASSWORD / DB_NAME
+This starts PostgreSQL and the backend on `http://localhost:8082`. Migrations are applied automatically on the first start with an empty volume. Later migrations are applied by hand (see [Migrations](#migrations)).
 
-# 3. Start the server.
+**Without Docker.** PostgreSQL must be running with the migrations applied.
+
+```bash
+cp .env.example .env          # DB_USER, DB_PASSWORD, DB_NAME
+dart pub get
 dart run bin/server.dev.dart
 ```
 
-The server listens on `8082` by default (override with the `PORT` environment
-variable).
+| Entry point | Use |
+|---|---|
+| `bin/server.dart` | Production. Reads configuration from environment variables; compiled to a native binary by the `Dockerfile` |
+| `bin/server.dev.dart` | Local development. Reads `.env` |
 
-## Database schema
+| Variable | Default | |
+|---|---|---|
+| `DB_HOST` | `localhost` | |
+| `DB_PORT` | `5432` | |
+| `DB_USER`, `DB_PASSWORD`, `DB_NAME` | — | required |
+| `PORT` | `8082` | HTTP port |
 
-The schema lives in versioned SQL files under `migrations/`. Apply them **in
-order** against an empty database:
+E-mail codes are written to the server log by `DevEmailSender`. To send real e-mail, implement `EmailCodeSenderService` (`lib/src/features/auth/shared/verify-email/domain/services/`) and register it instead of `DevEmailSender`.
 
-| File                          | Purpose                                                |
-| ----------------------------- | ------------------------------------------------------ |
-| `0001_init_auth_users.sql`    | `auth.users`, `auth.sessions`                          |
-| `0002_init_auth_sessions.sql` | `auth.sessions`                                        |
-| `0003_auth_email_codes.sql`   | `auth.pending_registrations`, `auth.login_email_codes` |
+## Migrations
+
+| File | Creates |
+|---|---|
+| `0001_init_auth_users.sql` | schema `auth`, table `auth.users` |
+| `0002_init_auth_sessions.sql` | `auth.sessions` |
+| `0003_auth_email_codes.sql` | `auth.pending_registrations`, `auth.login_email_codes` |
+
+Applied files are never edited; a schema change goes into a new `0004_*.sql`. To apply by hand:
 
 ```bash
-# Example with psql on the host:
-psql "postgres://<user>:<password>@localhost:5432/<db>" \
-  -f migrations/0001_init_auth_users.sql
-psql "postgres://<user>:<password>@localhost:5432/<db>" \
-  -f migrations/0002_init_auth_sessions.sql
-psql "postgres://<user>:<password>@localhost:5432/<db>" \
-  -f migrations/0003_auth_email_codes.sql
+psql "postgres://<user>:<password>@localhost:5432/<db>" -f migrations/0004_*.sql
 ```
 
-**Migration files are append-only**: never edit a file that has already been
-applied. New schema changes go into a new `0004_*.sql`, etc.
+## API
 
-## Auth API
+Base URL `http://localhost:8082`. Request and response bodies are JSON.
 
-Base URL: `http://localhost:8082/auth`
-
-All responses are JSON. Errors use a single envelope:
+### Errors
 
 ```json
 {
   "success": false,
   "error": {
-    "code": "MACHINE_READABLE_CODE",
-    "message": "Human-readable explanation",
+    "code": "VALIDATION_FAILED",
+    "message": "Some fields are invalid",
     "details": [
       { "field": "password", "code": "INVALID_PASSWORD", "message": "..." }
     ]
@@ -60,81 +69,66 @@ All responses are JSON. Errors use a single envelope:
 }
 ```
 
-`error.details[]` is present **only** for `VALIDATION_FAILED`. Other codes
-include `code` and `message` only.
+`details` is present only for `VALIDATION_FAILED`. Errors common to all endpoints:
+
+| Status | Code | When |
+|---|---|---|
+| 400 | `INVALID_JSON` | Body is not valid JSON |
+| 400 | `INVALID_BODY` | JSON root is not an object |
+| 400 | `INVALID_REQUEST_FIELDS` | A field is missing or has the wrong type |
+| 400 | `VALIDATION_FAILED` | Field rules failed; every failed field is listed in `details` |
+| 401 | `UNAUTHORIZED` | Protected endpoint without a valid token |
+
+Field codes in `details`: `INVALID_LOGIN`, `INVALID_EMAIL`, `INVALID_PASSWORD`, `INVALID_USERNAME`, `INVALID_DISPLAY_NAME`.
 
 ### Authentication
 
-Protected endpoints require a header:
+Protected endpoints (`/auth/me`, `/auth/logout`, `/auth/logout/all`) need:
 
 ```http
 Authorization: Bearer <access_token>
 ```
 
-`access_token` is returned by login endpoints. Only a SHA-256 hash is stored in
-`auth.sessions.token_hash`.
+The token is 32 random bytes; the database keeps only its SHA-256 hash (`auth.sessions.token_hash`). A session lives 30 days.
 
-**Public** (no Bearer): registration and login endpoints below.
+### Registration
 
-**Protected** (Bearer required): `/me`, `/logout`, `/logout/all`.
-
-In local development, email verification codes are printed to the server log
-(`DevEmailSender` via Talker), not sent over SMTP.
-
----
-
-### Registration (3 steps)
-
-#### 1. POST `/auth/register/start`
-
-Starts registration; sends an email code (logged in dev).
-
-**Request**
+#### `POST /auth/register/start`
 
 ```json
-{
-  "login": "john_doe",
-  "email": "john@example.com",
-  "password": "Password123"
-}
+{ "login": "john_doe", "email": "john@example.com", "password": "Password123" }
 ```
 
-**Response 201**
+**201** `{ "registration_id": "uuid" }`. A 4-digit code is sent to the e-mail; it is valid for 15 minutes.
+
+| Status | Code | When |
+|---|---|---|
+| 409 | `CONFLICT` | A pending registration with this e-mail already exists, including an expired one; remove it with `register/cancel` |
+
+The e-mail is not checked against existing users at this step; a taken e-mail is reported by `complete-profile` as `EMAIL_TAKEN`.
+
+#### `POST /auth/register/verify-email`
 
 ```json
-{ "registration_id": "uuid" }
+{ "registration_id": "uuid", "code": "1234" }
 ```
 
-#### 2. POST `/auth/register/verify-email`
+**200** `{ "verified": true }`
 
-**Request**
+| Status | Code | When |
+|---|---|---|
+| 400 | `INVALID_REGISTRATION` | Unknown `registration_id` |
+| 400 | `INVALID_EMAIL_CODE` | Wrong code |
+| 400 | `EMAIL_CODE_EXPIRED` | Code older than 15 minutes |
+| 400 | `EMAIL_CODE_ATTEMPTS_EXCEEDED` | 5 wrong attempts |
+
+#### `POST /auth/register/complete-profile`
 
 ```json
-{
-  "registration_id": "uuid",
-  "code": "1234"
-}
+{ "registration_id": "uuid", "username": "john_doe", "display_name": "John Doe" }
 ```
 
-**Response 200**
-
-```json
-{ "verified": true }
-```
-
-#### 3. POST `/auth/register/complete-profile`
-
-**Request**
-
-```json
-{
-  "registration_id": "uuid",
-  "username": "john_doe",
-  "display_name": "John Doe"
-}
-```
-
-**Response 201**
+**201**
 
 ```json
 {
@@ -146,24 +140,32 @@ Starts registration; sends an email code (logged in dev).
 }
 ```
 
----
+| Status | Code | When |
+|---|---|---|
+| 400 | `INVALID_REGISTRATION` | Unknown `registration_id` |
+| 400 | `EMAIL_NOT_VERIFIED` | `verify-email` was not completed |
+| 409 | `EMAIL_TAKEN` | E-mail belongs to an existing user |
+| 409 | `USERNAME_TAKEN` | Username is taken |
 
-### Login
-
-#### POST `/auth/login-password`
-
-**Request**
+#### `POST /auth/register/cancel`
 
 ```json
-{
-  "identifier": "john@example.com",
-  "password": "Password123"
-}
+{ "registration_id": "uuid" }
 ```
 
-`identifier` is login or email.
+**200** `{ "cancelled": true }`
 
-**Response 200**
+### Sign-in
+
+#### `POST /auth/login/password`
+
+```json
+{ "identifier": "john@example.com", "password": "Password123" }
+```
+
+`identifier` is a login or an e-mail.
+
+**200**
 
 ```json
 {
@@ -179,145 +181,91 @@ Starts registration; sends an email code (logged in dev).
 }
 ```
 
-`expires_in` is seconds (30 days).
+`expires_in` is in seconds (30 days).
 
-| Status | code                  | When                                 |
-| ------ | --------------------- | ------------------------------------ |
-| 401    | `INVALID_CREDENTIALS` | Unknown identifier or wrong password |
+| Status | Code | When |
+|---|---|---|
+| 401 | `INVALID_CREDENTIALS` | Unknown identifier or wrong password |
 
-#### POST `/auth/login/code/request`
-
-**Request**
+#### `POST /auth/login/code/request`
 
 ```json
 { "identifier": "john@example.com" }
 ```
 
-**Response 200**
+**200** `{ "sent": true }`, also for an unknown identifier.
+
+| Status | Code | When |
+|---|---|---|
+| 429 | `EMAIL_CODE_RESEND_TOO_SOON` | Less than 60 seconds since the previous code for this account |
+
+#### `POST /auth/login/code/verify`
 
 ```json
-{ "sent": true }
+{ "identifier": "john@example.com", "code": "1234" }
 ```
 
-Always returns `sent: true` (even if the user does not exist) to avoid account
-enumeration.
+**200**, same body as `login/password`.
 
-#### POST `/auth/login/code/verify`
+| Status | Code | When |
+|---|---|---|
+| 400 | `INVALID_CREDENTIALS` | Unknown identifier |
+| 400 | `INVALID_EMAIL_CODE` | Wrong code or no active code |
+| 400 | `EMAIL_CODE_EXPIRED` | Code older than 15 minutes |
+| 400 | `EMAIL_CODE_ATTEMPTS_EXCEEDED` | 5 wrong attempts |
 
-**Request**
+### Session
 
-```json
-{
-  "identifier": "john@example.com",
-  "code": "1234"
-}
+| Endpoint | Response 200 |
+|---|---|
+| `GET /auth/me` | the user object, as in `complete-profile` |
+| `POST /auth/logout` | `{ "ok": true }`; deletes the session of the token in the request |
+| `POST /auth/logout/all` | `{ "ok": true }`; deletes every session of the user |
+
+### Service
+
+| Endpoint | |
+|---|---|
+| `GET /` | service info |
+| `GET /health` | health check |
+
+## Structure
+
+```
+lib/src/
+├── server.dart              # pipeline, HTTP server, graceful shutdown
+├── app_module.dart          # root router: /, /health, /auth
+├── core/
+│   ├── config/              # DbConfig from env
+│   ├── data/                # Postgres error mapping mixin
+│   ├── di/                  # get_it + injectable, connection pool
+│   ├── api/                 # JSON responses
+│   └── errors/              # AppException hierarchy, error codes
+├── middleware/              # logging, errors, auth
+└── features/auth/
+    ├── auth_controller.dart # /auth/* routes
+    ├── register/            # start, verify_email, complete_profile, cancel
+    ├── login/               # password, request, verify
+    ├── logout/
+    ├── me/
+    └── shared/              # tokens, e-mail codes, TTLs, policies
 ```
 
-**Response 200** — same shape as `/auth/login-password` (`access_token`, `user`,
-`expires_in`).
-
-| Status | code                           | When               |
-| ------ | ------------------------------ | ------------------ |
-| 401    | `INVALID_CREDENTIALS`          | Unknown identifier |
-| 400    | `INVALID_EMAIL_CODE`           | Wrong code         |
-| 400    | `EMAIL_CODE_EXPIRED`           | Code TTL exceeded  |
-| 400    | `EMAIL_CODE_ATTEMPTS_EXCEEDED` | Too many attempts  |
-
----
-
-### Session (protected)
-
-#### GET `/auth/me`
-
-Returns the authenticated user profile.
-
-**Headers:** `Authorization: Bearer <access_token>`
-
-**Response 200**
-
-```json
-{
-  "id": "uuid",
-  "email": "john@example.com",
-  "username": "john_doe",
-  "display_name": "John Doe",
-  "created_at": "2026-05-19T00:00:00.000Z"
-}
-```
-
-| Status | code           | When                     |
-| ------ | -------------- | ------------------------ |
-| 401    | `UNAUTHORIZED` | Missing or invalid token |
-
-#### POST `/auth/logout`
-
-Revokes the **current** session (the Bearer token used in the request).
-
-**Headers:** `Authorization: Bearer <access_token>`
-
-**Response 200**
-
-```json
-{ "ok": true }
-```
-
-#### POST `/auth/logout/all`
-
-Revokes **all** sessions for the authenticated user.
-
-**Headers:** `Authorization: Bearer <access_token>`
-
-**Response 200**
-
-```json
-{ "ok": true }
-```
-
----
-
-### Common validation errors
-
-| Status | code                     | When                                     |
-| ------ | ------------------------ | ---------------------------------------- |
-| 400    | `INVALID_JSON`           | Body is not valid JSON                   |
-| 400    | `INVALID_BODY`           | JSON root is not an object               |
-| 400    | `INVALID_REQUEST_FIELDS` | Missing or wrong-type field              |
-| 400    | `VALIDATION_FAILED`      | Domain validation; see `error.details[]` |
-| 409    | `EMAIL_TAKEN`            | Email already registered                 |
-| 409    | `USERNAME_TAKEN`         | Username already taken                   |
-
----
+Each action has `api` (DTOs, mappers), `domain` (use case, repository interface, validation) and `data` (SQL repository).
 
 ## Tests
 
 ```bash
-dart test test/unit/features/auth/
+dart test
 ```
 
-API handler tests live under `test/unit/features/auth/api/` and use fake use
-cases (no database). Protected routes are exercised by setting
-`authenticatedUserIdKey` on the request context, matching what `authMiddleware`
-does in production.
+59 unit tests, no database needed. Endpoint tests in `test/unit/features/auth/api/` run requests through the real router and middleware with fake use cases. Protected routes are tested through the same `authMiddleware` as in production.
 
-## Manual smoke testing (Postman)
+## Manual check
 
-1. Import `postman/auth.postman_collection.json` (if present) or create requests
-   manually against `http://localhost:8082/auth`.
-2. Set environment variable `baseUrl = http://localhost:8082`.
-3. Apply migrations and start the server: `dart run bin/server.dev.dart`.
-4. **Registration:** `register/start` → copy code from server log →
-   `register/verify-email` → `register/complete-profile`.
-5. **Login:** `login-password` or `login/code/request` + `login/code/verify` →
-   copy `access_token`.
-6. **Session:** `GET /auth/me` with `Authorization: Bearer <access_token>`.
-7. **Logout:** `POST /auth/logout` → `GET /auth/me` should return `401`.
+Collections and an environment for Postman are in [`postman/`](postman). With the server running:
 
-### Smoke checklist
-
-| Flow           | Steps                      | Expected             |
-| -------------- | -------------------------- | -------------------- |
-| Register       | start → verify → complete  | 201 user profile     |
-| Login password | login-password             | 200 + `access_token` |
-| Login code     | code/request → code/verify | 200 + `access_token` |
-| Me             | GET /me + Bearer           | 200 user JSON        |
-| Logout         | POST /logout → GET /me     | 200 then 401         |
+1. `register/start` → take the code from the log → `register/verify-email` → `register/complete-profile`.
+2. `login/password`, or `login/code/request` + `login/code/verify` → copy `access_token`.
+3. `GET /auth/me` with the token → `200`.
+4. `POST /auth/logout` → `GET /auth/me` → `401`.
