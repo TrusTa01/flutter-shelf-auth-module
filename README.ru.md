@@ -20,9 +20,7 @@
 
 ## Демо
 
-[![Промо-ролик](media/promo.ru.jpg)](media/promo.ru.mp4)
-
-Нажмите на картинку, чтобы посмотреть ролик (28 с, MP4).
+https://github.com/user-attachments/assets/cf8d6a7d-4c13-4d08-b49c-987506a79b84
 
 ## Скриншоты
 
