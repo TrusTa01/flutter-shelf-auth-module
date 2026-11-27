@@ -20,9 +20,7 @@ Client tested on Android
 
 ## Demo
 
-[![Promo video](media/promo.jpg)](media/promo.mp4)
-
-Click the image to watch the video (28 s, MP4).
+https://github.com/user-attachments/assets/5833eeea-9a71-40f2-94ed-50160a5bd5c0
 
 ## Screenshots
 
